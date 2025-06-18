@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Personal Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Background Slideshow -->
+  <div class="slide-container">
+    <img src="img3.jpg" alt="Hero Image 1" />
+    <img src="img2.jpg" alt="Hero Image 2" />
+  </div>
+  <div class="overlay-gradient"></div>
+<div class="clock" id="clock">
+  <div id="time">00:00:00</div>
+  <div id="date">Loading date...</div>
+</div>
+
+  <!-- Navigation -->
+  <div class="nav-bar">
+    <ul>
+      <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="biodata.html"><i class="fas fa-user"></i> Biodata</a></li>
+      <li><a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a></li>
+      <li><a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a></li>
+      <li><a href="Family.html"><i class="fas fa-users"></i> Family</a></li>
+      <li><a href="gallery.html"><i class="fas fa-image"></i> Gallery</a></li>
+    </ul>
+  </div>
+
+  <!-- Centered Welcome Text with Typing Tagline -->
+  <div class="center-welcome">
+    <h1>Welcome to My Personal Web Page</h1>
+    <p class="typing-text" id="typed-text"></p><span class="cursor"></span>
+  </div>
+
+  <!-- Typing Animation Script -->
+  <script>
+    const taglines = [
+      "Exploring passions through pixels and purpose.",
+      "Crafted with heart and HTML.",
+      "One page, a thousand stories.",
+      "Design. Code. Inspire."
+    ];
+
+    const textElement = document.getElementById("typed-text");
+    let currentTag = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+      const currentText = taglines[currentTag];
+      if (isDeleting) {
+        charIndex--;
+        textElement.textContent = currentText.substring(0, charIndex);
+      } else {
+        charIndex++;
+        textElement.textContent = currentText.substring(0, charIndex);
+      }
+
+      if (!isDeleting && charIndex === currentText.length) {
+        setTimeout(() => isDeleting = true, 1500);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        currentTag = (currentTag + 1) % taglines.length;
+      }
+
+      const typingSpeed = isDeleting ? 40 : 80;
+      setTimeout(typeEffect, typingSpeed);
+    }
+
+    document.addEventListener("DOMContentLoaded", typeEffect);
+  </script>
+  <!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+    <p class="footer-text">&copy; 2025 Karthikz Raj • All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const time = now.toLocaleTimeString('en-GB'); // 24-hour format
+    const date = now.toLocaleDateString('en-GB', {
+      weekday: 'short',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+
+    document.getElementById("time").textContent = time;
+    document.getElementById("date").textContent = date;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+
+</body>
+</html>
